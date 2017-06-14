@@ -1,0 +1,173 @@
+<!DOCTYPE HTML> 
+<html lang="en">
+
+<head>
+	<title> GoalPro </title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <link rel="stylesheet" href="css/core.css" />
+    <script src="controller/controller.js"></script>
+</head>
+
+<body ng-app="app">
+<div ng-controller="MainCtrl">
+<nav class="navbar navbar-default navbar-fixed-top goalpronav">
+	<div class="container">
+		<ul class="nav nav-tabs">
+		  <li role="presentation"><a href="index.html">Home</a></li>
+		  <li role="presentation"><a href="groups.html">Groups</a></li>
+		  <li role="presentation" class="active"><a href="tasks.html">Task Board</a></li>
+		  <li role="presentation"><a href="profile.html">Profile</a></li>
+		  <li role="presentation"><a href="#">Settings</a></li>
+		</ul>
+	</div>
+</nav>
+
+<div class="container">
+	<div class="row">
+			<h3><font color="white"><span ng-bind="name">{{name}}</span>'s Taskboard</font></h3>
+	</div>
+</div>
+<div class="container">
+<div class="col-md-6 col-md-offset-3">
+	<form>
+	<div class="input-group">
+		<input type = "text" class="form-control" placeholder = "New task" ng-model="newTask">
+		<div class="input-group-btn" role="group">
+			<button type="button" class="btn btn-default" ng-click="newTaskStatus = taskStatuses.NOTSTARTED">Not Started</button>
+			<button type="button" class="btn btn-default" ng-click="newTaskStatus = taskStatuses.INPROGRESS">In Progress</button>
+			<button type="button" class="btn btn-default" ng-click="newTaskStatus = taskStatuses.BLOCKED">Blocked</button>
+			<button type="button" class="btn btn-default" ng-click="newTaskStatus = taskStatuses.COMPLETE">Complete</button>
+			<button class="btn btn-default" type="submit" ng-click="addTask()">Add<span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+		</div>
+	</div>
+	</form>
+</div>
+</div>
+
+<div class="container">
+	<div class="col-md-3">
+		<!--Tasks Not Started Panel -->
+		<div class="panel panel-default panel-red">
+			<div class="panel-heading">
+				<h3 class="panel-title">Not Started</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+			    	<li class="list-group-item clearfix" ng-repeat="task in tasks" ng-if = "task.taskStatus === taskStatuses.NOTSTARTED"> <span>{{task.text}}</span>
+			    	<br>
+			    		<div class="btn-group pull-right"> 
+		           			<!-- In Progress Button --> 
+			            	<button class = "btn btn-warning" type="button" ng-click="inProgressTask($index)"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+		           			</button> 
+		           			<!-- Block Button --> 
+			            	<button class = "btn btn-default" type="button" ng-click="blockTask($index)"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+		           			</button>
+		           			<!-- Complete Button --> 
+			            	<button class = "btn btn-success" type="button" ng-click="completeTask($index)"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+		           			<!-- Delete Button --> 
+           					<button class="btn btn-primary" type="button" ng-click="deleteTask($index)"> 
+             				<span class="glyphicon glyphicon-trash " aria-hidden="true"></span> 
+             				</button> 
+         				</div> 
+			    	</li> 
+		    	</ul>
+		    </div>
+		</div>
+	</div>
+	<div class="col-md-3">
+	<!--In Progress Panel -->
+		<div class="panel panel-default panel-yellow">
+			<div class="panel-heading">
+				<h3 class="panel-title">In Progress</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+			    	<li class="list-group-item clearfix" ng-repeat="task in tasks" ng-if = "task.taskStatus === taskStatuses.INPROGRESS"> <span>{{task.text}}</span>
+			    	<br>
+			    		<div class="btn-group pull-right"> 
+		           			<!-- Not Started Button --> 
+			            	<button class = "btn btn-danger" type="button" ng-click="notStartedTask($index)"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		           			</button> 
+		           			<!-- Block Button --> 
+			            	<button class = "btn btn-default" type="button" ng-click="blockTask($index)"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+		           			</button>
+		           			<!-- Complete Button --> 
+			            	<button class = "btn btn-success" type="button" ng-click="completeTask($index)"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> 
+		           			<!-- Delete Button --> 
+           					<button class="btn btn-primary" type="button" ng-click="deleteTask($index)"> 
+             				<span class="glyphicon glyphicon-trash " aria-hidden="true"></span> 
+             				</button> 
+         				</div> 
+         				</li> 
+		    	</ul>
+		    </div>
+		</div>
+	</div>
+	<div class="col-md-3">
+	<!--Blocked Panel -->
+		<div class="panel panel-default panel-gray">
+			<div class="panel-heading">
+				<h3 class="panel-title">Blocked</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+			    	<li class="list-group-item clearfix" ng-repeat="task in tasks" ng-if = "task.taskStatus === taskStatuses.BLOCKED"> <span>{{task.text}}</span>
+			    	<br>
+			    		<div class="btn-group pull-right"> 
+		          			<!-- Not Started Button --> 
+			            	<button class = "btn btn-danger" type="button" ng-click="notStartedTask($index)"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		           			</button> 
+		           			<!-- In Progress Button --> 
+			            	<button class = "btn btn-warning" type="button" ng-click="inProgressTask($index)"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+		           			</button>  
+		           			<!-- Complete Button --> 
+			            	<button class = "btn btn-success" type="button" ng-click="completeTask($index)"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+		           			<!-- Delete Button --> 
+           					<button class="btn btn-danger" type="button" ng-click="deleteTask($index)"> 
+             				<span class="glyphicon glyphicon-trash " aria-hidden="true"></span> 
+             				</button> 
+         				</div> 
+			    	</li> 
+		    	</ul>
+		    </div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<!--Done Panel-->
+		<div class="panel panel-default panel-green">
+			<div class="panel-heading">
+				<h3 class="panel-title">Complete</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+			    	<li class="list-group-item clearfix" ng-repeat="task in tasks" ng-if = "task.taskStatus === taskStatuses.COMPLETE"> <span>{{task.text}}</span>
+			    	<br>
+			    		<div class="btn-group pull-right">
+			    			<!-- Not Started Button --> 
+			            	<button class = "btn btn-danger" type="button" ng-click="notStartedTask($index)"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		           			</button>  
+		           			<!-- In Progress Button --> 
+			            	<button class = "btn btn-warning" type="button" ng-click="inProgressTask($index)"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+		           			</button> 
+		           			<!-- Block Button --> 
+			            	<button class = "btn btn-default" type="button" ng-click="blockTask($index)"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+		           			</button> 
+		           			<!-- Delete Button --> 
+           					<button class="btn btn-danger" type="button" ng-click="deleteTask($index)"> 
+             				<span class="glyphicon glyphicon-trash " aria-hidden="true"></span> 
+             				</button> 
+         				</div> 
+			    	</li> 
+		    	</ul>
+		    </div>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

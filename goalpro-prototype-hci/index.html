@@ -1,0 +1,267 @@
+<!DOCTYPE HTML> 
+<html lang="en">
+
+<head>
+	<title> GoalPro </title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <link rel="stylesheet" href="css/core.css" />
+    <script src="controller/controller.js"></script>
+</head>
+
+<body ng-app="app"> 
+	<div ng-controller="MainCtrl">
+	<nav class="navbar navbar-default navbar-fixed-top goalpronav">
+		<div class="container">
+			<ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a href="#">Home</a></li>
+			  <li role="presentation"><a href="groups.html">Groups</a></li>
+			  <li role="presentation"><a href="tasks.html">Task Board</a></li>
+			  <li role="presentation"><a href="profile.html">Profile</a></li>
+			  <li role="presentation"><a href="#">Settings</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="page-header gp-head"> 
+	<h1> <span ng-bind="name">{{name}}</span>'s Dashboard</h1>
+	</div>
+
+	<div class="container">
+		<!-- First column --> 
+		<div class="col-md-4">
+			<!-- Progress Panel --> 
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Progress</h3>
+			  </div>
+			  <div class="panel-body">
+			    <img src = http://www.conceptdraw.com/samples/resource/images/solutions/project-management-diagrams/Project-Management-Release-Burndown-Chart-Example.png>
+			  </div>
+			</div>
+
+			<!-- Reminders Panel --> 
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Reminders</h3>
+			  </div>
+			  <div class="panel-body">
+			    <ul class="list-group">
+			    	<li class="list-group-item alert-danger"> <b>Homework 1, Cryptology</b> Due 6:00 PM <span class="glyphicon glyphicon-exclamation-sign"> </span> </li>
+			    	<li class="list-group-item alert-danger"> <b>Turn in service hours form</b> Due 11:59 PM <span class="glyphicon glyphicon-exclamation-sign"> </span> </li>
+			    	<li class="list-group-item"> Buy dishwasher detergent</li>
+			    </ul>
+			  </div>
+			</div>
+
+			<!-- Messages Panel --> 
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Messages</h3>
+			  </div>
+			  <div class="panel-body">
+			    <ul class="list-group">
+			    	<li class="list-group-item"> <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <b>Ya Chutiraka</b> <br/> <i> Hey, did you get that assignment done?</i></li>
+			    	<li class="list-group-item"> <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Shannon Cruz <br/> <i>Did you get the file I sent to you yesterday?</i></li>
+			    </ul>
+			  </div>
+			</div>
+		</div>
+
+		<!-- Second column --> 
+		<div class="col-md-4">
+			<!-- Tasks Panel --> 
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Tasks
+
+		    	<!-- Button trigger modal to add new event-->
+				<button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#myModal1">
+				  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+			    </h3>
+			  </div>
+
+			  <!-- Modal -->
+				<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Add New Task</h4>
+				      </div>
+				      <div class="modal-body">
+				        <h4> Task </h4>
+				        <div class="input-group input-group-md">
+						  <input type="text" class="form-control" placeholder="Task Title" ng-model="newTask">
+						</div>
+
+						<h4> Description </h4>
+						<div class="input-group input-group-md">
+						  <input type="text" class="form-control" placeholder="Task Description" ng-model="newTaskDesc">
+						</div>
+
+						<h4> Deadline </h4>
+						<div class="input-group input-group-md">
+						  <input type="text" class="form-control" placeholder="mm/dd/yyyy 00:00 AM/PM" ng-model="newTaskDeadline">
+						</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary" ng-click="addTask()" data-dismiss="modal">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+			  <div class="panel-body">
+			  <!-- We'll have one of these groups be hard-coded for the prototype sake -->
+				<h4> Group Project </h4> <!-- we should have these be of the created group -->
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="task in tasks"> <button type="button" ng-click="quickComplete($index)" class="btn btn-default btn-xs" aria-label="Left Align"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button> <span>{{task.text}}</span>
+					</li>
+				</ul>
+			  </div>
+			</div>
+
+			<!-- Distribution Panel --> 
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Distribution</h3>
+			  </div>
+			  <div class="panel-body">
+			    <img class="graphImg" ng-src="img/{{graphCounter}}.png">
+			  </div>
+			</div>
+		</div>
+
+		<!-- Third column --> 
+		<div class="col-md-4">
+
+			<!-- Events Panel --> 
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			  	<h3 class="panel-title">Upcoming Events
+
+			  	<!-- Button trigger modal to add new event-->
+				<button type="button" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#myModal2">
+				  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+				</h3>
+
+			  </div>
+
+				<!-- Modal -->
+				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Create New Event</h4>
+				      </div>
+				      <div class="modal-body">
+				        <h4> Event Title </h4>
+				        <div class="input-group input-group-md">
+						  <input type="text" class="form-control" placeholder="New Event" ng-model="newEvent">
+						</div>
+
+						<h4> Date </h4>
+						<div class="input-group input-group-md">
+						  <input type="text" class="form-control" placeholder="mm/dd/yyyy" ng-model="newEventDate">
+						</div>
+
+						<h4> Time </h4>
+						<div class="input-group input-group-md">
+						  <input type="text" class="form-control" placeholder="00:00 AM/PM" ng-model="newEventTime">
+						</div>
+
+						<h4> Location </h4>
+						<div class="input-group input-group-md">
+						  <input type="text" class="form-control" placeholder="Meeting Place" ng-model="newEventLocation">
+						</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary" ng-click="addEvent()" data-dismiss="modal">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+			  <!-- Table (Hardcoded) -->
+			  <table class="table">
+			  	<caption><h4>Saturday, Mar 11</h4></caption>
+				  <thead>
+				      <tr>
+				         <th>Time</th>
+				         <th>Event</th>
+				         <th>Location</th>
+				      </tr>
+				   </thead>
+
+				   <tbody>
+				   	  <tr>
+				   	  	<td>8:00 AM</td>
+				   	  	<td>Match 1</td>
+				   	  	<td>Flavet, Court 1</td>
+				   	  </tr>
+				   	  <tr>
+				   	  	<td>10:00 AM</td>
+				   	  	<td>Match 2</td>
+				   	  	<td>Flavet, Court 4</td>
+				   	  </tr>
+				   </tbody>
+			  </table>
+
+			  <!-- Table -->
+				<table class="table">
+				  	<caption><h4>Sunday, Apr 10</h4></caption>
+					  <thead>
+					      <tr>
+					         <th>Time</th>
+					         <th>Event</th>
+					         <th>Location</th>
+					      </tr>
+					   </thead>
+
+					   <tbody>
+					   	  <tr ng-repeat="event in events">
+					   	  	<td>{{event.time}}</td>
+					   	  	<td>{{event.text}}</td>
+					   	  	<td>{{event.location}}</td>
+					   	  </tr>
+					   </tbody>
+				 </table>
+
+			</div>
+
+
+			<!-- Files Panel --> 
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Files</h3>
+			  </div>
+			  <div class="panel-body">
+			    <ul class="list-group">
+			    	<li class="list-group-item"> <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Service Group </li>
+				    	<li class="list-group-item"> 
+				    		<ul class="list-group">  
+				    			<li class="list-group-item"> <span class="glyphicon glyphicon-file" aria-hidden="true"></span> servicehoursform.pdf </li> 
+				    			<li class="list-group-item"> <span class="glyphicon glyphicon-file" aria-hidden="true"></span> volunteer_waiver.pdf </li> 
+				    		</ul>
+				    	</li>
+			    	<li class="list-group-item"> <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span> Club Sport</li>
+			    	<li class="list-group-item"> <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span> Sorority</li>
+			    </ul>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

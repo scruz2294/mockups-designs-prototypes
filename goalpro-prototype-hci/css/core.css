@@ -1,0 +1,38 @@
+/* core css file for the goalpro app */
+
+body {
+	background-color: #393939;
+	padding-top: 30px;
+}
+
+img {
+	max-width: 100%;
+}
+
+.gp-head {
+	background-color: #f8f8f8;
+	color: #393939; 
+	padding-top: 1px;
+	padding-left: 10px;
+}
+
+.panel-red {
+	background-color: #dd5151;
+}
+
+.panel-yellow {
+	background-color: #e9ea90
+}
+
+.panel-gray {
+	background-color: #c1c1b8
+}
+
+.panel-green {
+	background-color: #799758
+}
+
+.graphImg {
+	max-width: 75%;
+	max-height: 100%;
+}

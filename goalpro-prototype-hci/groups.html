@@ -1,0 +1,155 @@
+<!DOCTYPE HTML> 
+<html lang="en">
+
+<head>
+	<title> Groups </title>
+	<!-- Latest compiled and minified CSS -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="controller/function.js"></script>
+	<link rel="stylesheet" href="css/core.css">
+</head>
+
+
+<body> 
+
+  <!-- Modal/Pop up -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal/Pop up content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create Group</h4>
+        </div>
+        <div class="modal-body">
+		  <form role="form" id="form">
+			<div class="form-group">
+			  <label for="text">Group name:</label>
+			  <input type="text" class="form-control" id="group" name="group" placeholder="Enter group name"><br>
+			  <input type="radio" name="groupType" value="academic" id="academic"> Academic<br>
+			  <input type="radio" name="groupType" value="extracurricular" id="extra"> Extracurricular<br>
+			</div>
+			<div class="form-group">
+			  <label for="pwd">Members:</label>
+			  <input type="text" class="form-control" id="member_1" placeholder="Enter member 1">
+			  <input type="text" class="form-control" id="member_2" placeholder="Enter member 2">
+			  <input type="text" class="form-control" id="member_3" placeholder="Enter member 3">
+			  <div><a href="#myModal_2" data-toggle="modal" data-target="#myModal_2">Add more member </a><a href="#myModal_2" data-toggle="modal" data-target="#myModal_2"><font color="#337ab7"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></font></a></div>
+			</div>
+			<div class="form-group">
+			  <label for="text">Description:</label>
+			  <input type="text" class="form-control" id="description" placeholder="Enter description">
+			</div>
+			<button type="button" class="btn btn-default" onclick="addNewGroup(); addNewDescription(); addNewMember();" data-dismiss="modal"><font color="green">Submit</font></button>
+		  </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default" data-dismiss="modal"><font color="red">Close</font></button>
+        </div>
+      </div>
+      
+	  
+
+			  
+	  						
+						<form id="form">
+						  <input id="group" type="text" name="group">
+						  <button type="button" onclick="addNewGroup()"><font color='green'> Submit</font></button>
+						</form>
+						
+	  
+	  
+	  
+	  
+	  
+	  
+    </div>
+  </div>
+
+
+
+<nav class="navbar navbar-default navbar-fixed-top goalpronav">
+	<div class="container">
+		<ul class="nav nav-tabs">
+		  <li role="presentation"><a href="index.html">Home</a></li>
+		  <li role="presentation" class="active"><a href="#">Groups</a></li>
+		  <li role="presentation"><a href="tasks.html">Task Board</a></li>
+		  <li role="presentation"><a href="profile.html">Profile</a></li>
+		  <li role="presentation"><a href="#">Settings</a></li>
+		</ul>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6" style="background-color:lavender;">
+					<div class="col-sm-12" style="background-color:lavender;">
+						<h3><font color="black">All Groups</font></h3>
+						
+						
+						<!--<h1>hi</h1>-->
+						<!--<input type="button" onclick="count_rabbits()" value="Count rabbits!"/>-->
+						
+						
+						<div class="panel panel-primary">
+						  <div class="panel-heading"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><font color="white">Academic</font></a></div>
+						  <div id="collapse1" class="panel-collapse collapse in">
+							  <div class="panel-body"><a href="#">Senior Project</a></div>
+							  <div class="panel-body"><a href="#">HCI</a></div>
+							  <div class="panel-body" id = "newGroupAcademic"><a href="#"><font color="#337ab7"></font></a></div>
+							  
+						  </div>
+						  <div class="panel-heading"><a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><font color="white">Extracurricular</font></a></div>
+						  <div id="collapse2" class="panel-collapse collapse in">
+							  <div class="panel-body"><a href="#">Service Group</a></div>
+							  <div class="panel-body"><a href="#">Club Sport</a></div>
+							  <div class="panel-body"><a href="#">Sorority</a></div>
+							  <div class="panel-body" id = "newGroupExtra"><a href="#"><font color="#337ab7"></font></a></div>
+						  </div>
+						</div>
+					</div>
+					
+			</div>	
+			<div class="col-sm-6" style="background-color:lavender;">	
+				<div class="col-sm-12" style="background-color:lavender;">
+					<h3><font color="black">New</font></h3>
+					<div class="panel panel-primary">
+						<div class="panel-body"><a href="#" data-toggle="modal" data-target="#myModal">Create Group </a><a href="#" data-toggle="modal" data-target="#myModal"><font color="#337ab7"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></font></a></div>
+					</div>
+					<h3><font color="black">Invitations</font></h3>
+					<div class="panel panel-primary">
+						  <div class="panel-heading"><a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><font color="white">Academic</font></a></div>
+						  <div id="collapse3" class="panel-collapse collapse in">
+							<div class="panel-body" id="researchTeam"><a href="#">Research Team</a>
+								<div>
+								  <button type="submit" class="btn btn-default" onclick="addResearchTeamGroup(); hide('researchTeam');"><font color='green'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accept</font></button>
+								  <button type="submit" class="btn btn-default"  onclick="hide('researchTeam');"><font color='red'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Decline</font></button>
+								</div>
+							</div>
+						  </div>	
+						  <div class="panel-heading"><a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><font color="white">Extracurricular</font></a></div>
+						  <div id="collapse4" class="panel-collapse collapse in">
+							  <div class="panel-body" id="acapella"><a href="#">Acapella</a>
+								<div>
+								  <button type="submit" class="btn btn-default " onclick="addAcapellaGroup(); hide('acapella');"><font color='green'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accept</font></button>
+								  <button type="submit" class="btn btn-default"  onclick="hide('acapella');"><font color='red'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Decline<font></button>
+								</div>
+							  </div>	
+							  <div class="panel-body" id="springBreakTrip"><a href="#">Spring Break Trip</a>
+								<div>
+								  <button type="submit" class="btn btn-default" onclick="addSpringBreakTripGroup(); hide('springBreakTrip');"><font color='green'><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accept</font></button>
+								  <button type="submit" class="btn btn-default" onclick="hide('springBreakTrip');"><font color='red'><span class="glyphicon glyphicon-remove" aria-hidden="true" ></span> Decline<font></button>
+								</div>
+							  </div>
+						  </div>	  
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</nav>
+</body>
+</html>
