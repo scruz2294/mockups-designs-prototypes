@@ -1,4 +1,4 @@
-# Stephanie's Wireframes, Mockups, Designs, and Prototypes
+# Stephanie's GitHub Portfolio
 This repository contains any UX/UI mockups, designs, or prototypes that I've built either as a personal or academic project, or for a client. Find a blurb of each project below!
 
 ## goalpro-prototype-hci: GoalPro Webapp
