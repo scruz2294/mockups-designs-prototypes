@@ -15,4 +15,4 @@ The original project repository is located here: [https://github.com/goalpro/goa
 
 I am working on this project as part of a lab assignment for the online course, *UX Fundamentals*, offered by Pluralsight. I am taking this course to further develop my UX research and design skills, as well as my increase my experience with UX Design tools, Sketch and InVision. 
 
-Link to InVision project: [https://invis.io/ZYC7KD7PG#/239481310_Welcome_-Logged_In-](https://invis.io/ZYC7KD7PG#/239481310_Welcome_-Logged_In-)
+Link to InVision project: [https://invis.io/ZYC7KD7PG](https://invis.io/ZYC7KD7PG)
